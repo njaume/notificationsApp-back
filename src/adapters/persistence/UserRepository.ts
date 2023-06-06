@@ -2,6 +2,6 @@ import { MESSAGE_CATEGORIES } from "../../constants";
 import { User } from "../../domain/models/User";
 
 export interface UserRepository {
-  //createUser(name: string, email: string): User;
+  getUserById(id: string): User | undefined;
   getUsersByCategory(category: MESSAGE_CATEGORIES): User[];
 }

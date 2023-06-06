@@ -44,4 +44,9 @@ export class UserPersistenceRepository implements UserRepository {
   public getUsersByCategory(category: MESSAGE_CATEGORIES): User[] {
     return Users.filter(u => u.subscribed.includes(category))
   }
+
+  public getUserById(id : string): User | undefined {
+    console.log('getUserById', id)
+    return Users.find(u => u.id === id)
+  }
 }

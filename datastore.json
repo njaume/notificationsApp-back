@@ -1,0 +1,32 @@
+[
+  {
+    "userId": "1",
+    "name": "User1",
+    "email": "email1",
+    "message": "great messaeeegasdsadasddsa",
+    "category": 1,
+    "date": "2023-06-06T21:15:06.597Z",
+    "type": [
+      1,
+      0,
+      2
+    ],
+    "fromUserEmail": "email1",
+    "fromUserId": "1"
+  },
+  {
+    "userId": "1",
+    "name": "User1",
+    "email": "email1",
+    "message": "great messaeeegasdsadasddsa",
+    "category": 1,
+    "date": "2023-06-06T21:15:06.597Z",
+    "type": [
+      1,
+      0,
+      2
+    ],
+    "fromUserEmail": "email3",
+    "fromUserId": "3"
+  }
+]

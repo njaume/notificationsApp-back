@@ -5,8 +5,8 @@ import { Message } from "../../domain/models/Message";
 import { NotificationService } from "./NotificationService";
 @Service()
 export class UserService {
-  private userRepository: UserRepository;
-  private notificationService: NotificationService;
+  userRepository: UserRepository;
+  notificationService: NotificationService;
   constructor(
     @Inject() userRepository: UserPersistenceRepository,
     @Inject() notificationService: NotificationService
@@ -14,14 +14,23 @@ export class UserService {
     this.userRepository = userRepository;
     this.notificationService = notificationService;
   }
-
-  public async sendMessage(message: Message) {
+  async getUserById(id: string) {
     try {
+      console.log('getUserById', id)
+      const user = await this.userRepository.getUserById(id);
+      return user;
+    } catch (error) {
+      console.warn(error);
+      return undefined;
+    }
+  }
+  async sendMessage(message: Message) {
+    try {
+      console.log("message", message);
       const users = await this.userRepository.getUsersByCategory(
         message.category
       );
       await this.notificationService.sendMessage(message, users);
-
       return true;
     } catch (error) {
       console.warn(error);
