@@ -32,7 +32,7 @@ export class NotificationService {
       const emailUsers: User[] = [];
       const smsUsers: User[] = [];
       const pushUsers: User[] = [];
-      console.log('toUsers', toUsers)
+      console.log("toUsers", toUsers);
       toUsers.forEach((user) => {
         if (user.channels.includes(NOTIFICATION_TYPES.EMAIL))
           emailUsers.push(user);
@@ -59,13 +59,22 @@ export class NotificationService {
           toUsers
         )
       );
-      console.log('sendMessage', emailUsers, smsUsers, pushUsers)
       await Promise.allSettled(promises);
-      console.log('sendMessage')
       return true;
     } catch (error) {
       //code some error handler
-      console.log('error', error)
+      console.log("error", error);
+      return error;
+    }
+  }
+
+  public async getLogs() {
+    try {
+      const logs = await this.notificationPersistenceRepository.getLogs();
+      return logs;
+    } catch (error) {
+      //code some error handler
+      console.log("error", error);
       return error;
     }
   }

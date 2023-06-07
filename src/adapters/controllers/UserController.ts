@@ -38,4 +38,16 @@ export class UserController {
         .send("Something was wrong, please try again later");
     }
   }
+
+  async getLogs(req: Request, res: Response) {
+    try {
+      const response = await this.userService.getLogs();
+      return res.status(200).send(response);
+    } catch (error) {
+      console.log("error", error);
+      return res
+        .status(500)
+        .send("Something was wrong, please try again later");
+    }
+  }
 }

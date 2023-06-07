@@ -22,7 +22,16 @@ export class NotificationPersistenceRepository
     }
   }
 
-  
+  async getLogs() {
+    const jsonRecords = await fs.promises.readFile(this.filename, {
+      encoding: "utf8",
+    });
+
+    const records = JSON.parse(jsonRecords);
+    return records.sort((x: Notification, y: Notification) => {
+      return new Date(y.date).getTime() - new Date(x.date).getTime();
+    });
+  }
   public async createNotification(
     message: Message,
     toUsers: User[] = []
@@ -58,5 +67,4 @@ export class NotificationPersistenceRepository
 
     return notifSent;
   }
-  
 }

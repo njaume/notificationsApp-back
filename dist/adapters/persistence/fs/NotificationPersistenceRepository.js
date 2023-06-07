@@ -34,6 +34,17 @@ let NotificationPersistenceRepository = exports.NotificationPersistenceRepositor
             fs.writeFileSync(this.filename, "[]");
         }
     }
+    getLogs() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const jsonRecords = yield fs.promises.readFile(this.filename, {
+                encoding: "utf8",
+            });
+            const records = JSON.parse(jsonRecords);
+            return records.sort((x, y) => {
+                return new Date(y.date).getTime() - new Date(x.date).getTime();
+            });
+        });
+    }
     createNotification(message, toUsers = []) {
         return __awaiter(this, void 0, void 0, function* () {
             // Assign unique Id to each record

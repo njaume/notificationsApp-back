@@ -57,6 +57,17 @@ let UserService = exports.UserService = class UserService {
             }
         });
     }
+    getLogs() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return this.notificationService.getLogs();
+            }
+            catch (error) {
+                console.warn(error);
+                return false;
+            }
+        });
+    }
 };
 exports.UserService = UserService = __decorate([
     (0, typedi_1.Service)(),

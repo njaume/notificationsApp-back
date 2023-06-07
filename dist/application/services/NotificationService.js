@@ -42,7 +42,7 @@ let NotificationService = exports.NotificationService = class NotificationServic
                 const emailUsers = [];
                 const smsUsers = [];
                 const pushUsers = [];
-                console.log('toUsers', toUsers);
+                console.log("toUsers", toUsers);
                 toUsers.forEach((user) => {
                     if (user.channels.includes(constants_1.NOTIFICATION_TYPES.EMAIL))
                         emailUsers.push(user);
@@ -58,14 +58,25 @@ let NotificationService = exports.NotificationService = class NotificationServic
                 if (pushUsers.length)
                     promises.push(this.pushSenderRepository.sendNotification(message, pushUsers));
                 promises.push(this.notificationPersistenceRepository.createNotification(message, toUsers));
-                console.log('sendMessage', emailUsers, smsUsers, pushUsers);
                 yield Promise.allSettled(promises);
-                console.log('sendMessage');
                 return true;
             }
             catch (error) {
                 //code some error handler
-                console.log('error', error);
+                console.log("error", error);
+                return error;
+            }
+        });
+    }
+    getLogs() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const logs = yield this.notificationPersistenceRepository.getLogs();
+                return logs;
+            }
+            catch (error) {
+                //code some error handler
+                console.log("error", error);
                 return error;
             }
         });

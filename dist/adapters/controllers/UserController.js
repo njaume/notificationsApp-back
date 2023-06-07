@@ -55,6 +55,20 @@ let UserController = exports.UserController = class UserController {
             }
         });
     }
+    getLogs(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const response = yield this.userService.getLogs();
+                return res.status(200).send(response);
+            }
+            catch (error) {
+                console.log("error", error);
+                return res
+                    .status(500)
+                    .send("Something was wrong, please try again later");
+            }
+        });
+    }
 };
 __decorate([
     (0, typedi_1.Inject)(),

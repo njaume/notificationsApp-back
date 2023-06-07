@@ -37,4 +37,13 @@ export class UserService {
       return false;
     }
   }
+
+  async getLogs() {
+    try {
+     return  this.notificationService.getLogs();
+    } catch (error) {
+      console.warn(error);
+      return false;
+    }
+  }
 }
