@@ -23,14 +23,18 @@ export class NotificationPersistenceRepository
   }
 
   async getLogs() {
-    const jsonRecords = await fs.promises.readFile(this.filename, {
-      encoding: "utf8",
-    });
+    try {
+      const jsonRecords = await fs.promises.readFile(this.filename, {
+        encoding: "utf8",
+      });
 
-    const records = JSON.parse(jsonRecords);
-    return records.sort((x: Notification, y: Notification) => {
-      return new Date(y.date).getTime() - new Date(x.date).getTime();
-    });
+      const records = JSON.parse(jsonRecords);
+      return records.sort((x: Notification, y: Notification) => {
+        return new Date(y.date).getTime() - new Date(x.date).getTime();
+      });
+    } catch (error) {
+      return [];
+    }
   }
   public async createNotification(
     message: Message,
